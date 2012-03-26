@@ -1,3 +1,11 @@
+# Mutual Mobile Changes
+
+*Temporary Fixes-Install*
+
+1. In your XCode Project, add all the .h and .m files from the *Source* folder into your project. 
+2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
+    * Optionally add `#define MR_SHORTHAND` to your PCH file if you want to use shorthand like `findAll` instead of `MR_findAll`
+
 # MagicalRecord for Core Data
 
 In software engineering, the active record pattern is a design pattern found in software that stores its data in relational databases. It was named by Martin Fowler in his book Patterns of Enterprise Application Architecture. The interface to such an object would include functions such as Insert, Update, and Delete, plus properties that correspond more-or-less directly to the columns in the underlying database table.
