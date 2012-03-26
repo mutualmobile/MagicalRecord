@@ -231,9 +231,9 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     NSNumber *notifies = objc_getAssociatedObject(self, kMagicalRecordNotifiesMainContextAssociatedValueKey);
     return notifies ? [notifies boolValue] : NO;
                              )
-    PRIVATE_QUEUES_ENABLED(
-                           return [self parentContext] == [[self class] MR_defaultContext];
-                           )
+//    PRIVATE_QUEUES_ENABLED(
+//                           return [self parentContext] == [[self class] MR_defaultContext];
+//                           )
     return NO;
 }
 
@@ -252,12 +252,12 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
                                  )
 #pragma clang diagnostic pop
 
-        PRIVATE_QUEUES_ENABLED(
-                               if (enabled)
-                               {
-                                   [self setParentContext:mainContext];
-                               }
-                               )
+//        PRIVATE_QUEUES_ENABLED(
+//                               if (enabled)
+//                               {
+//                                   [self setParentContext:mainContext];
+//                               }
+//                               )
     }
 }
 
@@ -293,13 +293,13 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
                          context = [[NSManagedObjectContext alloc] init];
                          [context setPersistentStoreCoordinator:coordinator];
                                  )
-        PRIVATE_QUEUES_ENABLED(
-            MRLog(@"Creating context in Context Private Queue Mode");
-            context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-            [context performBlockAndWait:^{
-                [context setPersistentStoreCoordinator:coordinator];
-            }];
-        )
+//        PRIVATE_QUEUES_ENABLED(
+//            MRLog(@"Creating context in Context Private Queue Mode");
+//            context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+//            [context performBlockAndWait:^{
+//                [context setPersistentStoreCoordinator:coordinator];
+//            }];
+//        )
 
         MR_AUTORELEASE(context);
     }
@@ -329,15 +329,15 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
          context.MR_notifiesMainContextOnSave = YES;
     )
     
-    PRIVATE_QUEUES_ENABLED
-    (
-        MRLog(@"Creating Context - Using Private queue mode");
-        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        if (context != [self MR_defaultContext])
-        {
-            [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
-        }
-    )
+//    PRIVATE_QUEUES_ENABLED
+//    (
+//        MRLog(@"Creating Context - Using Private queue mode");
+//        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+//        if (context != [self MR_defaultContext])
+//        {
+//            [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
+//        }
+//    )
     
     return context;
 }

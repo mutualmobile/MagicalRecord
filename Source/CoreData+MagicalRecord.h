@@ -49,11 +49,15 @@
     }
 
 #define THREAD_ISOLATION_ENABLED(...) \
-    if (kCFCoreFoundationVersionNumber < MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION) \
+    __VA_ARGS__ \
+
+/*
+#define THREAD_ISOLATION_ENABLED(...) \
+    if (YESkCFCoreFoundationVersionNumber < MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION) \
     { \
         __VA_ARGS__ \
     }
-
+*/
 
 #if MR_USE_ARC
 #define MR_RETAIN(xx)
